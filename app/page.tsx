@@ -4,7 +4,7 @@ import { getAllArticles } from "@/lib/db";
 import { CATEGORIES } from "@/lib/categories";
 import ArticleCard from "@/components/ArticleCard";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
   const articles = await getAllArticles();

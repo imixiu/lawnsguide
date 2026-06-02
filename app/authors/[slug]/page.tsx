@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { getAuthorBySlug, getAllArticles } from "@/lib/db";
+import { getAuthorBySlug, getArticlesByAuthor } from "@/lib/db";
 import ArticleCard from "@/components/ArticleCard";
 import EmptyState from "@/components/EmptyState";
 import type { Metadata } from "next";
@@ -22,8 +22,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
   if (!author) notFound();
-  const all = await getAllArticles();
-  const articles = all.filter(a => a.author === slug);
+  const articles = await getArticlesByAuthor(slug);
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10">
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10">

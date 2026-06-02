@@ -53,6 +53,19 @@ export async function getAllArticles(): Promise<Article[]> {
   return rows as Article[];
 }
 
+export async function getRecentArticles(limit: number): Promise<Article[]> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT id, site, type, short_title, language, published_time, modified_time,
+           author, img, title, description, url
+    FROM articles
+    WHERE site = ${SITE}
+    ORDER BY published_time DESC NULLS LAST, id DESC
+    LIMIT ${limit}
+  `;
+  return rows as Article[];
+}
+
 export async function getRelatedArticles(currentId: number, type: string): Promise<Article[]> {
   const sql = getSql();
   const rows = await sql`
@@ -72,6 +85,18 @@ export async function getArticlesByType(type: string): Promise<Article[]> {
            author, img, title, description, url
     FROM articles
     WHERE site = ${SITE} AND type = ${type}
+    ORDER BY modified_time DESC NULLS LAST, id DESC
+  `;
+  return rows as Article[];
+}
+
+export async function getArticlesByAuthor(slug: string): Promise<Article[]> {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT id, site, type, short_title, language, published_time, modified_time,
+           author, img, title, description, url
+    FROM articles
+    WHERE site = ${SITE} AND author = ${slug}
     ORDER BY modified_time DESC NULLS LAST, id DESC
   `;
   return rows as Article[];

@@ -3,7 +3,7 @@ import ArticleCard from "@/components/ArticleCard";
 import EmptyState from "@/components/EmptyState";
 import type { Metadata } from "next";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: "All Articles",
   description: "Browse all lawn care, landscaping, and gardening articles on LawnsGuide.",
