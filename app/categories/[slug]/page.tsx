@@ -6,6 +6,12 @@ import EmptyState from "@/components/EmptyState";
 import type { Metadata } from "next";
 
 export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const { CATEGORIES } = await import("@/lib/categories");
+  return CATEGORIES.map(c => ({ slug: c.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

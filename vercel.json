@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.lawnsguide.com" }],
+      "destination": "https://lawnsguide.com/$1",
+      "permanent": true
+    }
+  ]
+}

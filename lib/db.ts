@@ -72,8 +72,8 @@ export async function getRelatedArticles(currentId: number, type: string): Promi
     SELECT id, site, type, short_title, title, img
     FROM articles
     WHERE site = ${SITE} AND type = ${type} AND id != ${currentId}
-    ORDER BY RANDOM()
-    LIMIT 10
+    ORDER BY id DESC
+    LIMIT 6
   `;
   return rows as Article[];
 }

@@ -11,36 +11,34 @@ export const revalidate = 3600;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const { getRecentArticles } = await import("@/lib/db");
-  const articles = await getRecentArticles(6);
-  return articles.map(a => ({ slug: a.short_title }));
+  return [];
 }
 
 const getCachedArticle = unstable_cache(
   (slug: string) => getArticleBySlug(slug),
-  ["article-by-slug"],
+  ["article-by-slug-type"],
   { revalidate: 3600 }
 );
 
 const getCachedRelated = unstable_cache(
   (id: number, type: string) => getRelatedArticles(id, type),
-  ["related-articles"],
+  ["related-articles-type"],
   { revalidate: 3600 }
 );
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ type: string; slug: string }> }): Promise<Metadata> {
+  const { type, slug } = await params;
   const article = await getCachedArticle(slug);
   if (!article) return {};
   return {
     title: article.title ?? undefined,
     description: article.description ?? undefined,
-    alternates: { canonical: `/blog/${slug}` },
+    alternates: { canonical: `/${type}/${slug}` },
     openGraph: { title: article.title ?? undefined, description: article.description ?? undefined, images: article.img ? [article.img] : [] },
   };
 }
 
-export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ArticlePage({ params }: { params: Promise<{ type: string; slug: string }> }) {
   const { slug } = await params;
   const article = await getCachedArticle(slug);
   if (!article) notFound();
@@ -64,7 +62,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
       <div className="max-w-[800px] mx-auto">
-        {/* Breadcrumb */}
         <nav className="text-sm text-[var(--color-muted-fg)] mb-6 flex items-center gap-2 flex-wrap">
           <Link href="/" className="hover:text-[var(--color-primary)]">Home</Link>
           <span>/</span>

@@ -34,12 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={jakarta.variable}>
       <head>
         <Script id="aplus" strategy="afterInteractive">{`window.APLUS_CONFIG={pid:'seo_vertical'};(function(w,d,s,q){w[q]=w[q]||[];var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.id='beacon-aplus';j.setAttribute('exparams','userid=&aplus&sidx=aplusSidex&ckx=aplusCkx');j.src='//g.alicdn.com/alilog/mlog/aplus_v2.js';j.crossorigin='anonymous';f.parentNode.insertBefore(j,f);})(window,document,'script','aplus_queue');var q=(window.aplus_queue||(window.aplus_queue=[]));q.push({action:'aplus.setPageSPM',arguments:['a27h9','46134557']});`}</Script>
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-95PY8PSZ0Y" strategy="afterInteractive" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-2CMPWQQBGB" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-95PY8PSZ0Y');
+          gtag('config', 'G-2CMPWQQBGB');
         `}</Script>
       </head>
       <body className="flex flex-col min-h-dvh">
