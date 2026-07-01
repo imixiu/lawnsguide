@@ -1,7 +1,13 @@
 /**
  * Postbuild script: inject CF Cache API into OpenNext worker.js
- * Caches GET 200 responses for content pages (1 year).
+ * Caches GET 200 responses for content pages (10 years).
  * Skips sitemap, _next, api, and non-200 responses.
+ *
+ * Usage:
+ *   cp this-file scripts/postbuild-cache.mjs
+ *   npx @opennextjs/cloudflare build
+ *   node scripts/postbuild-cache.mjs
+ *   npx wrangler deploy
  */
 import { readFileSync, writeFileSync } from "fs";
 
@@ -24,9 +30,6 @@ const cacheHelpers = `
                     if (hit) {
                         const r = new Response(hit.body, hit);
                         r.headers.set("x-cache", "HIT");
-                        if (new URL(url).pathname.endsWith(".md")) {
-                            r.headers.set("content-type", "text/markdown; charset=utf-8");
-                        }
                         return r;
                     }
                 } catch(e) {}
@@ -60,11 +63,17 @@ let patched = worker.replace(
     cacheHelpers + "\n            const url = new URL(request.url);"
 );
 
-// 2. Cache lookup before middleware
+// 2. Bot block + cache lookup before middleware
+// Bot blocking MUST happen before cache lookup, otherwise bots get cached 200 responses
 const lastHelperLine = cacheHelpers.split("\n").pop().trim();
 patched = patched.replace(
     lastHelperLine + "\n            const url = new URL(request.url);",
     lastHelperLine + `
+            // Bot block before cache
+            const botUa = (request.headers.get("user-agent") || "").toLowerCase();
+            if (botUa.includes("semrush") || botUa.includes("ahrefsbot") || botUa.includes("ahrefs")) {
+                return new Response("Forbidden", { status: 403 });
+            }
             if (request.method === "GET" && shouldCache(request.url)) {
                 const hit = await cacheGet(request.url);
                 if (hit) return hit;
@@ -95,41 +104,36 @@ patched = patched.replace(
             return resp;`
 );
 
-// 5. Fix charset for .md files (CF serves text/markdown without charset)
-patched = patched.replace(
-    `                if (request.method === "GET" && shouldCache(request.url)) {
-                    return await cachePut(request.url, reqOrResp);
-                }
-                return reqOrResp;`,
-    `                if (url.pathname.endsWith(".md")) {
-                    reqOrResp.headers.set("content-type", "text/markdown; charset=utf-8");
-                }
-                if (request.method === "GET" && shouldCache(request.url)) {
-                    return await cachePut(request.url, reqOrResp);
-                }
-                return reqOrResp;`
-);
-
-// 6. Fix charset on handler return too
-patched = patched.replace(
-    `            const resp = await handler(reqOrResp, env, ctx, request.signal);
-            if (request.method === "GET" && shouldCache(request.url)) {
-                return await cachePut(request.url, resp);
+// 5. Add bot check before the SECOND cacheGet injection point (handler-level)
+// The worker.js may have TWO separate `if (request.method === "GET" && shouldCache` blocks.
+// Step 2 only adds bot check before the first one. If there's a second, add it here.
+const cacheLookupLine = 'if (request.method === "GET" && shouldCache(request.url)) {\n                const hit = await cacheGet(request.url);';
+const botBlockForSecond = `const _botUa = (request.headers.get("user-agent") || "").toLowerCase();
+            if (_botUa.includes("semrush") || _botUa.includes("ahrefsbot") || _botUa.includes("ahrefs")) {
+                return new Response("Forbidden", { status: 403 });
             }
-            return resp;`,
-    `            const resp = await handler(reqOrResp, env, ctx, request.signal);
-            if (url.pathname.endsWith(".md")) {
-                resp.headers.set("content-type", "text/markdown; charset=utf-8");
-            }
-            if (request.method === "GET" && shouldCache(request.url)) {
-                return await cachePut(request.url, resp);
-            }
-            return resp;`
-);
+            `;
+const occurrences = patched.split(cacheLookupLine).length - 1;
+if (occurrences > 1) {
+    let firstDone = false;
+    patched = patched.replace(
+        new RegExp(cacheLookupLine.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
+        (match) => {
+            if (!firstDone) { firstDone = true; return match; }
+            return botBlockForSecond + match;
+        }
+    );
+}
 
 writeFileSync(WORKER_PATH, patched);
 console.log("✓ Injected CF Cache API (URL+status-based, middleware+handler)");
-console.log("✓ Injected charset=utf-8 for .md files");
+
+// Verify bot blocking is in ALL cache paths
+const botCount = (patched.match(/semrush/g) || []).length;
+if (botCount < 2) {
+  console.log("⚠️ Bot check found in only " + botCount + " location(s) — expected ≥2.");
+  console.log("   Manually add bot UA check before ALL 'if (request.method === \"GET\" && shouldCache' blocks.");
+}
 
 // Delete static index.html from assets so route handler takes over
 import { unlinkSync } from "fs";
