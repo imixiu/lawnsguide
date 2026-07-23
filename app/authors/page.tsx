@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Authors",
   description: "Meet the lawn care and gardening experts behind LawnsGuide.",
   alternates: { canonical: "/authors" },
+  robots: { index: false, follow: true },
 };
 
 export default async function AuthorsPage() {

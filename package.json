@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npx @opennextjs/cloudflare build && node scripts/postbuild-cache.mjs",
+    "build": "next build",
     "start": "next start",
     "init-db": "npx tsx lib/init-db.ts",
     "build:cf": "npx @opennextjs/cloudflare build"

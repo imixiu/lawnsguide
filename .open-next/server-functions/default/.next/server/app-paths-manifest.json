@@ -3,6 +3,8 @@
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/about/page": "app/about/page.js",
+  "/api/debug-author/route": "app/api/debug-author/route.js",
+  "/api/test-db/route": "app/api/test-db/route.js",
   "/authors/[slug]/page": "app/authors/[slug]/page.js",
   "/authors/page": "app/authors/page.js",
   "/blog/[slug]/page": "app/blog/[slug]/page.js",
@@ -10,10 +12,10 @@
   "/categories/[slug]/page": "app/categories/[slug]/page.js",
   "/categories/page": "app/categories/page.js",
   "/contact/page": "app/contact/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/icon/route": "app/icon/route.js",
+  "/icon.png/route": "app/icon.png/route.js",
   "/page": "app/page.js",
   "/privacy-policy/page": "app/privacy-policy/page.js",
   "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/terms-of-service/page": "app/terms-of-service/page.js"
 }

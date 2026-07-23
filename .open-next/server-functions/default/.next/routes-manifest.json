@@ -12,6 +12,78 @@
       "priority": true,
       "statusCode": 308,
       "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/author/:slug",
+      "destination": "/authors/:slug",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/author(?:/([^/]+?))(?:/)?$"
+    },
+    {
+      "source": "/landscaping",
+      "destination": "/categories/landscaping",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/landscaping(?:/)?$"
+    },
+    {
+      "source": "/lawn-care",
+      "destination": "/categories/lawn-care",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/lawn-care(?:/)?$"
+    },
+    {
+      "source": "/pest-control",
+      "destination": "/categories/pest-control",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/pest-control(?:/)?$"
+    },
+    {
+      "source": "/tree-care",
+      "destination": "/categories/tree-care",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/tree-care(?:/)?$"
+    },
+    {
+      "source": "/gardening",
+      "destination": "/categories/gardening",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/gardening(?:/)?$"
+    },
+    {
+      "source": "/home-garden",
+      "destination": "/categories/home-garden",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/home-garden(?:/)?$"
+    },
+    {
+      "source": "/home-and-garden",
+      "destination": "/categories/home-garden",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/home-and-garden(?:/)?$"
+    },
+    {
+      "source": "/grass-types",
+      "destination": "/categories/home-garden",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/grass-types(?:/)?$"
+    },
+    {
+      "source": "/sitemap/sitemapindex.xml",
+      "destination": "/sitemap.xml",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/sitemap/sitemapindex\\.xml(?:/)?$"
+    },
+    {
+      "source": "/sitemap/sitemap1.xml",
+      "destination": "/sitemap.xml",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/sitemap/sitemap1\\.xml(?:/)?$"
+    },
+    {
+      "source": "/sitemap/sitemap2.xml",
+      "destination": "/sitemap.xml",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/sitemap/sitemap2\\.xml(?:/)?$"
     }
   ],
   "headers": [],
@@ -82,6 +154,18 @@
       "namedRegex": "^/about(?:/)?$"
     },
     {
+      "page": "/api/debug-author",
+      "regex": "^/api/debug\\-author(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/debug\\-author(?:/)?$"
+    },
+    {
+      "page": "/api/test-db",
+      "regex": "^/api/test\\-db(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/test\\-db(?:/)?$"
+    },
+    {
       "page": "/authors",
       "regex": "^/authors(?:/)?$",
       "routeKeys": {},
@@ -106,16 +190,10 @@
       "namedRegex": "^/contact(?:/)?$"
     },
     {
-      "page": "/favicon.ico",
-      "regex": "^/favicon\\.ico(?:/)?$",
+      "page": "/icon.png",
+      "regex": "^/icon\\.png(?:/)?$",
       "routeKeys": {},
-      "namedRegex": "^/favicon\\.ico(?:/)?$"
-    },
-    {
-      "page": "/icon",
-      "regex": "^/icon(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/icon(?:/)?$"
+      "namedRegex": "^/icon\\.png(?:/)?$"
     },
     {
       "page": "/privacy-policy",
@@ -128,6 +206,12 @@
       "regex": "^/robots\\.txt(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/robots\\.txt(?:/)?$"
+    },
+    {
+      "page": "/sitemap.xml",
+      "regex": "^/sitemap\\.xml(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sitemap\\.xml(?:/)?$"
     },
     {
       "page": "/terms-of-service",

@@ -17,11 +17,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const author = await getAuthorBySlug(slug);
-  if (!author) return {};
+  if (!author) return { robots: { index: false, follow: true } };
   return {
     title: author.name ?? undefined,
     description: author.description ?? undefined,
     alternates: { canonical: `/authors/${slug}` },
+    robots: { index: false, follow: true },
   };
 }
 

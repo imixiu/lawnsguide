@@ -1,5 +1,5 @@
 import * as mysql from "mysql2/promise";
-import { tairGet, tairSet } from "./tair";
+import { tairGet } from "./tair";
 
 export interface Article {
   id: number;
@@ -60,8 +60,8 @@ async function q(text: string, params: unknown[] = []): Promise<any[]> {
 
 export const SITE = "lawnsguide";
 
-export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const key = `lawnsguide:article:${slug}`;
+export async function getArticleBySlug(type: string, slug: string): Promise<Article | null> {
+  const key = `lawnsguide:article:${type}:${slug}`;
   const cached = await tairGet(key);
   if (cached) return cached as Article;
 
@@ -70,7 +70,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     [SITE, slug]
   );
   const article = (rows[0] as Article) ?? null;
-  if (article) tairSet(key, article);
+
   return article;
 }
 
@@ -103,9 +103,11 @@ export async function getArticlesByType(type: string): Promise<Article[]> {
 }
 
 export async function getArticlesByAuthor(slug: string): Promise<Article[]> {
+  const author = await getAuthorBySlug(slug);
+  if (!author) return [];
   return q(
     "SELECT id, site, type, short_title, language, published_time, modified_time, author, img, title, description, url FROM articles WHERE site = ? AND author = ? AND is_online IN ('Y', '1') ORDER BY published_time DESC, id DESC",
-    [SITE, slug]
+    [SITE, author.name]
   ) as Promise<Article[]>;
 }
 

@@ -349,7 +349,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/best-grass-seed-for-clay-soil-and-full-sun": {
+    "/blog/best-grass-seed-for-sun-all-day": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -364,7 +364,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/best-grass-seed-for-clay-soil-and-full-sun.rsc",
+      "dataRoute": "/blog/best-grass-seed-for-sun-all-day.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -374,7 +374,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/groundhog-removal-tips": {
+    "/blog/how-to-stake-newly-planted-tree-without-trunk-damage": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -389,7 +389,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/groundhog-removal-tips.rsc",
+      "dataRoute": "/blog/how-to-stake-newly-planted-tree-without-trunk-damage.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -399,7 +399,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/lawn-care-for-dog-urine-spots": {
+    "/blog/lawn-care-tips-march": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -414,7 +414,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/lawn-care-for-dog-urine-spots.rsc",
+      "dataRoute": "/blog/lawn-care-tips-march.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -424,7 +424,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/stump-removal-methods": {
+    "/blog/managing-cicada-killer-wasps-sandy-soil-garden-beds": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -439,7 +439,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/stump-removal-methods.rsc",
+      "dataRoute": "/blog/managing-cicada-killer-wasps-sandy-soil-garden-beds.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -449,7 +449,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/tick-control-yard": {
+    "/blog/prevent-manage-sooty-mold-trees-aphid-infestations": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -464,7 +464,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/tick-control-yard.rsc",
+      "dataRoute": "/blog/prevent-manage-sooty-mold-trees-aphid-infestations.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -474,7 +474,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/tree-trimming-safety": {
+    "/blog/spot-control-chinch-bugs-before-lawn-destruction": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -489,7 +489,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/tree-trimming-safety.rsc",
+      "dataRoute": "/blog/spot-control-chinch-bugs-before-lawn-destruction.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -697,40 +697,11 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/favicon.ico": {
-      "initialHeaders": {
-        "cache-control": "public, max-age=0, must-revalidate",
-        "content-type": "image/x-icon",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"
-      },
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/favicon.ico",
-      "dataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/icon": {
+    "/icon.png": {
       "initialHeaders": {
         "cache-control": "public, max-age=0, must-revalidate",
         "content-type": "image/png",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/icon/layout,_N_T_/icon/route,_N_T_/icon"
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/icon.png/layout,_N_T_/icon.png/route,_N_T_/icon.png"
       },
       "experimentalBypassFor": [
         {
@@ -744,7 +715,7 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/icon",
+      "srcRoute": "/icon.png",
       "dataRoute": null,
       "allowHeader": [
         "host",
@@ -798,6 +769,35 @@
       ],
       "initialRevalidateSeconds": false,
       "srcRoute": "/robots.txt",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/sitemap.xml": {
+      "initialHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "application/xml",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/sitemap.xml/layout,_N_T_/sitemap.xml/route,_N_T_/sitemap.xml"
+      },
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/sitemap.xml",
       "dataRoute": null,
       "allowHeader": [
         "host",
@@ -949,8 +949,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "3dafc4fcc84d774f9b2a39119416274f",
-    "previewModeSigningKey": "2def5952d8bf813818b1415c056c130f9aa325db42d17009d346d5caa11db90e",
-    "previewModeEncryptionKey": "1ed33de8ac25428a488aef0ee6520363f5c404008395dee1afe19880ecadd62f"
+    "previewModeId": "ccfe11935c7741d286c7d2f97bf1f93a",
+    "previewModeSigningKey": "e946c0dbda3653bd4cb082d3eab266f7fb7ff83fe05e51548933e5376278824c",
+    "previewModeEncryptionKey": "22e5bb15c89928c45edbde55d2e5c04bdd48cb68a3ce2c69f56bb63b87035f4b"
   }
 }

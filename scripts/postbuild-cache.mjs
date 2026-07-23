@@ -1,13 +1,7 @@
 /**
  * Postbuild script: inject CF Cache API into OpenNext worker.js
- * Caches GET 200 responses for content pages (10 years).
+ * Caches GET 200 responses for content pages (1 year).
  * Skips sitemap, _next, api, and non-200 responses.
- *
- * Usage:
- *   cp this-file scripts/postbuild-cache.mjs
- *   npx @opennextjs/cloudflare build
- *   node scripts/postbuild-cache.mjs
- *   npx wrangler deploy
  */
 import { readFileSync, writeFileSync } from "fs";
 
@@ -25,8 +19,8 @@ const cacheHelpers = `
             }
             async function cacheGet(url) {
                 try {
-                    const key = new Request(url, { method: "GET", headers: {} });
-                    const hit = await caches.default.match(key);
+const cacheUrl = new URL(url); cacheUrl.searchParams.set("_cv", "2"); const key = new Request(cacheUrl.toString(), { method: "GET", headers: {} });
+                const hit = await caches.default.match(key);
                     if (hit) {
                         const r = new Response(hit.body, hit);
                         r.headers.set("x-cache", "HIT");
@@ -42,7 +36,7 @@ const cacheHelpers = `
                 }
                 try {
                     const body = await resp.arrayBuffer();
-                    const key = new Request(url, { method: "GET", headers: {} });
+                    const cacheUrl2 = new URL(url); cacheUrl2.searchParams.set("_cv", "2"); const key = new Request(cacheUrl2.toString(), { method: "GET", headers: {} });
                     const h = new Headers(resp.headers);
                     h.delete("vary");
                     h.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
@@ -63,17 +57,11 @@ let patched = worker.replace(
     cacheHelpers + "\n            const url = new URL(request.url);"
 );
 
-// 2. Bot block + cache lookup before middleware
-// Bot blocking MUST happen before cache lookup, otherwise bots get cached 200 responses
+// 2. Cache lookup before middleware
 const lastHelperLine = cacheHelpers.split("\n").pop().trim();
 patched = patched.replace(
     lastHelperLine + "\n            const url = new URL(request.url);",
     lastHelperLine + `
-            // Bot block before cache
-            const botUa = (request.headers.get("user-agent") || "").toLowerCase();
-            if (botUa.includes("semrush") || botUa.includes("ahrefsbot") || botUa.includes("ahrefs")) {
-                return new Response("Forbidden", { status: 403 });
-            }
             if (request.method === "GET" && shouldCache(request.url)) {
                 const hit = await cacheGet(request.url);
                 if (hit) return hit;
@@ -104,36 +92,21 @@ patched = patched.replace(
             return resp;`
 );
 
-// 5. Add bot check before the SECOND cacheGet injection point (handler-level)
-// The worker.js may have TWO separate `if (request.method === "GET" && shouldCache` blocks.
-// Step 2 only adds bot check before the first one. If there's a second, add it here.
-const cacheLookupLine = 'if (request.method === "GET" && shouldCache(request.url)) {\n                const hit = await cacheGet(request.url);';
-const botBlockForSecond = `const _botUa = (request.headers.get("user-agent") || "").toLowerCase();
-            if (_botUa.includes("semrush") || _botUa.includes("ahrefsbot") || _botUa.includes("ahrefs")) {
-                return new Response("Forbidden", { status: 403 });
-            }
-            `;
-const occurrences = patched.split(cacheLookupLine).length - 1;
-if (occurrences > 1) {
-    let firstDone = false;
-    patched = patched.replace(
-        new RegExp(cacheLookupLine.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
-        (match) => {
-            if (!firstDone) { firstDone = true; return match; }
-            return botBlockForSecond + match;
-        }
-    );
-}
+
+// 7. Block /_next/image at Worker entry — unoptimized: true means this route should never be hit
+patched = patched.replace(
+    `            const url = new URL(request.url);`,
+    `            const url = new URL(request.url);
+            if (url.pathname === "/_next/image") {
+                return new Response("Not Found", {
+                    status: 404,
+                    headers: { "Cache-Control": "public, max-age=86400" }
+                });
+            }`
+);
 
 writeFileSync(WORKER_PATH, patched);
 console.log("✓ Injected CF Cache API (URL+status-based, middleware+handler)");
-
-// Verify bot blocking is in ALL cache paths
-const botCount = (patched.match(/semrush/g) || []).length;
-if (botCount < 2) {
-  console.log("⚠️ Bot check found in only " + botCount + " location(s) — expected ≥2.");
-  console.log("   Manually add bot UA check before ALL 'if (request.method === \"GET\" && shouldCache' blocks.");
-}
 
 // Delete static index.html from assets so route handler takes over
 import { unlinkSync } from "fs";

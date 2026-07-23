@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 }
 
 const getCachedArticle = unstable_cache(
-  (slug: string) => getArticleBySlug(slug),
+  (slug: string) => getArticleBySlug("", slug),
   ["article-by-slug"],
   { revalidate: 3600 }
 );
@@ -82,9 +82,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="flex items-center gap-3 text-sm text-[var(--color-muted-fg)] mb-8">
           {article.author && <Link href={`/authors/${article.author}`} className="hover:text-[var(--color-primary)] font-medium">{article.author}</Link>}
           {article.published_time && (
-            <time dateTime={article.published_time}>
-              {new Date(article.published_time).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-            </time>
+            <span>
+              Published{" "}
+              <time dateTime={article.published_time}>
+                {new Date(article.published_time).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+              </time>
+            </span>
+          )}
+          {article.modified_time && article.modified_time !== article.published_time && (
+            <span>
+              Updated{" "}
+              <time dateTime={article.modified_time}>
+                {new Date(article.modified_time).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+              </time>
+            </span>
           )}
         </div>
 
@@ -95,7 +106,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         )}
 
         <div
-          className="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-[var(--color-foreground)] [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-[var(--color-foreground)] [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mb-5 [&_p]:leading-7 [&_a]:text-[var(--color-primary)] [&_a]:underline [&_a:hover]:text-[var(--color-primary-dark)] [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-5 [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-5 [&_li]:mb-2 [&_li]:leading-7 [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--color-primary)] [&_blockquote]:pl-4 [&_blockquote]:my-6 [&_blockquote]:text-[var(--color-muted-fg)] [&_blockquote]:italic [&_table]:w-full [&_table]:border-collapse [&_table]:my-6 [&_table]:text-sm [&_thead]:bg-[var(--color-primary)] [&_th]:text-white [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:font-semibold [&_td]:px-4 [&_td]:py-3 [&_td]:border-b [&_td]:border-[var(--color-border)] [&_code]:bg-[var(--color-muted)] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_pre]:bg-[var(--color-muted)] [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:my-6 [&_hr]:border-[var(--color-border)] [&_hr]:my-8 [&_strong]:font-semibold [&_strong]:text-[var(--color-foreground)] [&_em]:italic"
+          className="[&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h1]:text-[var(--color-foreground)] [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-[var(--color-foreground)] [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-[var(--color-foreground)] [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:mt-4 [&_h4]:mb-2 [&_p]:mb-5 [&_p]:leading-7 [&_a]:text-[var(--color-primary)] [&_a]:underline [&_a:hover]:text-[var(--color-primary-dark)] [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-5 [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-5 [&_li]:mb-2 [&_li]:leading-7 [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--color-primary)] [&_blockquote]:pl-4 [&_blockquote]:my-6 [&_blockquote]:text-[var(--color-muted-fg)] [&_blockquote]:italic [&_table]:w-full [&_table]:border-collapse [&_table]:my-6 [&_table]:text-sm [&_thead]:bg-[var(--color-primary)] [&_th]:text-white [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:font-semibold [&_td]:px-4 [&_td]:py-3 [&_td]:border-b [&_td]:border-[var(--color-border)] [&_code]:bg-[var(--color-muted)] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_pre]:bg-[var(--color-muted)] [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:my-6 [&_hr]:border-[var(--color-border)] [&_hr]:my-8 [&_strong]:font-semibold [&_strong]:text-[var(--color-foreground)] [&_em]:italic"
           dangerouslySetInnerHTML={{ __html: article.body || "" }}
         />
       </div>

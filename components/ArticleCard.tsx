@@ -31,9 +31,9 @@ export default function ArticleCard({ article }: { article: Article }) {
         <p className="text-sm text-[var(--color-muted-fg)] line-clamp-2 flex-1">{article.description}</p>
         <div className="mt-3 flex items-center justify-between text-xs text-[var(--color-muted-fg)]">
           <span>{article.author}</span>
-          {article.published_time && (
-            <time dateTime={article.published_time}>
-              {new Date(article.published_time).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+          {(article.modified_time || article.published_time) && (
+            <time dateTime={article.modified_time || article.published_time || ""}>
+              {new Date((article.modified_time || article.published_time)!).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
             </time>
           )}
         </div>

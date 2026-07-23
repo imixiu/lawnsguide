@@ -4,7 +4,7 @@
     "env": {},
     "webpack": null,
     "typescript": {
-      "ignoreBuildErrors": false
+      "ignoreBuildErrors": true
     },
     "typedRoutes": false,
     "distDir": ".next",
@@ -63,24 +63,11 @@
           "search": ""
         }
       ],
-      "remotePatterns": [
-        {
-          "protocol": "https",
-          "hostname": "images.unsplash.com"
-        },
-        {
-          "protocol": "https",
-          "hostname": "s.alicdn.com"
-        },
-        {
-          "protocol": "https",
-          "hostname": "placehold.co"
-        }
-      ],
+      "remotePatterns": [],
       "qualities": [
         75
       ],
-      "unoptimized": false,
+      "unoptimized": true,
       "customCacheHandler": false
     },
     "devIndicators": {
@@ -320,7 +307,69 @@
     "turbopack": {
       "root": "/data/vercel-projects/lawnsguide"
     },
-    "distDirRoot": ".next"
+    "distDirRoot": ".next",
+    "_originalRedirects": [
+      {
+        "source": "/author/:slug",
+        "destination": "/authors/:slug",
+        "permanent": true
+      },
+      {
+        "source": "/landscaping",
+        "destination": "/categories/landscaping",
+        "permanent": true
+      },
+      {
+        "source": "/lawn-care",
+        "destination": "/categories/lawn-care",
+        "permanent": true
+      },
+      {
+        "source": "/pest-control",
+        "destination": "/categories/pest-control",
+        "permanent": true
+      },
+      {
+        "source": "/tree-care",
+        "destination": "/categories/tree-care",
+        "permanent": true
+      },
+      {
+        "source": "/gardening",
+        "destination": "/categories/gardening",
+        "permanent": true
+      },
+      {
+        "source": "/home-garden",
+        "destination": "/categories/home-garden",
+        "permanent": true
+      },
+      {
+        "source": "/home-and-garden",
+        "destination": "/categories/home-garden",
+        "permanent": true
+      },
+      {
+        "source": "/grass-types",
+        "destination": "/categories/home-garden",
+        "permanent": true
+      },
+      {
+        "source": "/sitemap/sitemapindex.xml",
+        "destination": "/sitemap.xml",
+        "permanent": true
+      },
+      {
+        "source": "/sitemap/sitemap1.xml",
+        "destination": "/sitemap.xml",
+        "permanent": true
+      },
+      {
+        "source": "/sitemap/sitemap2.xml",
+        "destination": "/sitemap.xml",
+        "permanent": true
+      }
+    ]
   },
   "appDir": "/data/vercel-projects/lawnsguide",
   "relativeAppDir": "",

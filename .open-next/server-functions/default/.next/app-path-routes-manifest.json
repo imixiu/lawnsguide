@@ -3,6 +3,8 @@
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
   "/about/page": "/about",
+  "/api/debug-author/route": "/api/debug-author",
+  "/api/test-db/route": "/api/test-db",
   "/authors/[slug]/page": "/authors/[slug]",
   "/authors/page": "/authors",
   "/blog/[slug]/page": "/blog/[slug]",
@@ -10,10 +12,10 @@
   "/categories/[slug]/page": "/categories/[slug]",
   "/categories/page": "/categories",
   "/contact/page": "/contact",
-  "/favicon.ico/route": "/favicon.ico",
-  "/icon/route": "/icon",
+  "/icon.png/route": "/icon.png",
   "/page": "/",
   "/privacy-policy/page": "/privacy-policy",
   "/robots.txt/route": "/robots.txt",
+  "/sitemap.xml/route": "/sitemap.xml",
   "/terms-of-service/page": "/terms-of-service"
 }
