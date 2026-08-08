@@ -2,13 +2,23 @@ import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Categories",
-  description: "Browse lawn care and gardening articles by category.",
-  alternates: { canonical: "/categories" },
-};
+export const revalidate = 3600;
 
-export default function CategoriesPage() {
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
+  const params = await searchParams;
+  const page = params.page ? parseInt(params.page, 10) : 1;
+  const base: Metadata = {
+    title: page > 1 ? `Categories - Page ${page}` : "Categories",
+    description: "Browse lawn care and gardening articles by category.",
+    alternates: { canonical: page > 1 ? `/categories?page=${page}` : "/categories" },
+  };
+  if (page > 1) {
+    base.robots = { index: false, follow: true };
+  }
+  return base;
+}
+
+export default function CategoriesPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10">
       <h1 className="text-3xl font-bold mb-8">Categories</h1>
