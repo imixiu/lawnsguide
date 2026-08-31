@@ -21,7 +21,10 @@ const nextConfig: NextConfig = {
       // Stale static sitemap paths → 410
       { source: "/sitemap/sitemapindex.xml", destination: "/sitemap.xml", permanent: true },
       { source: "/sitemap/sitemap1.xml", destination: "/sitemap.xml", permanent: true },
-      { source: "/sitemap/sitemap2.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/pest-control", destination: "/categories/pest-control", permanent: true },
+      // Fix 404 pagination URLs
+      { source: "/blog/page/:num", destination: "/blog", permanent: true },
+      { source: "/categories/page/:num", destination: "/categories", permanent: true },
     ];
   },
 };

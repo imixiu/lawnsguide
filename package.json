@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "init-db": "npx tsx lib/init-db.ts",
-    "build:cf": "npx @opennextjs/cloudflare build"
+    "build:cf": "npx @opennextjs/cloudflare build && node scripts/postbuild-cache.mjs",
+    "postbuild": "node scripts/postbuild-cache.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.52.0",

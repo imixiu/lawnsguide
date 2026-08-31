@@ -6,6 +6,14 @@
 import { readFileSync, writeFileSync } from "fs";
 
 const WORKER_PATH = ".open-next/worker.js";
+
+// Skip if worker.js doesn't exist yet (e.g. when triggered by npm lifecycle during next build)
+import { existsSync } from "fs";
+if (!existsSync(WORKER_PATH)) {
+  console.log("(skipping: .open-next/worker.js not found — run after open-next build)");
+  process.exit(0);
+}
+
 const worker = readFileSync(WORKER_PATH, "utf-8");
 
 // 1. Cache helpers

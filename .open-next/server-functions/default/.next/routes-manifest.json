@@ -80,10 +80,22 @@
       "regex": "^(?!/_next)/sitemap/sitemap1\\.xml(?:/)?$"
     },
     {
-      "source": "/sitemap/sitemap2.xml",
-      "destination": "/sitemap.xml",
+      "source": "/pest-control",
+      "destination": "/categories/pest-control",
       "statusCode": 308,
-      "regex": "^(?!/_next)/sitemap/sitemap2\\.xml(?:/)?$"
+      "regex": "^(?!/_next)/pest-control(?:/)?$"
+    },
+    {
+      "source": "/blog/page/:num",
+      "destination": "/blog",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/blog/page(?:/([^/]+?))(?:/)?$"
+    },
+    {
+      "source": "/categories/page/:num",
+      "destination": "/categories",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/categories/page(?:/([^/]+?))(?:/)?$"
     }
   ],
   "headers": [],

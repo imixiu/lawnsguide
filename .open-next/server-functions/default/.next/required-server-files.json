@@ -365,8 +365,18 @@
         "permanent": true
       },
       {
-        "source": "/sitemap/sitemap2.xml",
-        "destination": "/sitemap.xml",
+        "source": "/pest-control",
+        "destination": "/categories/pest-control",
+        "permanent": true
+      },
+      {
+        "source": "/blog/page/:num",
+        "destination": "/blog",
+        "permanent": true
+      },
+      {
+        "source": "/categories/page/:num",
+        "destination": "/categories",
         "permanent": true
       }
     ]

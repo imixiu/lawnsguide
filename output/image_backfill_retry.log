@@ -1,0 +1,24 @@
+═══════════════════════════════════════════════
+  progradelist image backfill
+═══════════════════════════════════════════════
+  Total without images: 16
+  Resume from ID:       0
+  Concurrency:          3
+  Shard:                0/1
+  CDN Token:            alibaba-icbu-se...
+═══════════════════════════════════════════════
+
+[16/16] ✓0 ✗16 (gen:16 cdn:0) 0.0/s ETA:0.0h | lastId:13711294
+  ❌ ID:13704016 No image: {"code":"InvalidApiKey","message":"Invalid API-key provided.","request
+  ❌ ID:13704341 No image: {"code":"InvalidApiKey","message":"Invalid API-key provided.","request
+  ❌ ID:13705085 No image: {"code":"InvalidApiKey","message":"Invalid API-key provided.","request
+
+✅ All articles processed!
+
+═══════════════════════════════════════════════
+  Complete!
+  Success: 0
+  Failed:  16 (gen:16 cdn:0)
+  Time:    4s (0.0h)
+  Rate:    0.0 img/s
+═══════════════════════════════════════════════

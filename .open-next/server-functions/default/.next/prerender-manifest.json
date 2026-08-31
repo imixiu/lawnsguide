@@ -324,32 +324,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": 3600,
-      "initialExpireSeconds": 31536000,
-      "srcRoute": "/blog",
-      "dataRoute": "/blog.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/blog/best-grass-seed-for-sun-all-day": {
+    "/blog/best-grass-seed-for-ct-sun-and-shade": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -364,7 +339,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/best-grass-seed-for-sun-all-day.rsc",
+      "dataRoute": "/blog/best-grass-seed-for-ct-sun-and-shade.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -374,7 +349,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/how-to-stake-newly-planted-tree-without-trunk-damage": {
+    "/blog/best-grass-seed-for-wisconsin": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -389,7 +364,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/how-to-stake-newly-planted-tree-without-trunk-damage.rsc",
+      "dataRoute": "/blog/best-grass-seed-for-wisconsin.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -399,7 +374,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/lawn-care-tips-march": {
+    "/blog/diy-leaf-miner-control-vegetable-flower-gardens": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -414,7 +389,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/lawn-care-tips-march.rsc",
+      "dataRoute": "/blog/diy-leaf-miner-control-vegetable-flower-gardens.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -424,7 +399,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/managing-cicada-killer-wasps-sandy-soil-garden-beds": {
+    "/blog/managing-tree-suckers-water-sprouts-healthy-growth": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -439,7 +414,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/managing-cicada-killer-wasps-sandy-soil-garden-beds.rsc",
+      "dataRoute": "/blog/managing-tree-suckers-water-sprouts-healthy-growth.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -449,7 +424,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/prevent-manage-sooty-mold-trees-aphid-infestations": {
+    "/blog/organic-lawn-care-dayton-ohio": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -464,7 +439,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/prevent-manage-sooty-mold-trees-aphid-infestations.rsc",
+      "dataRoute": "/blog/organic-lawn-care-dayton-ohio.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -474,7 +449,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/spot-control-chinch-bugs-before-lawn-destruction": {
+    "/blog/proper-tree-staking-techniques-young-trees": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -489,31 +464,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/spot-control-chinch-bugs-before-lawn-destruction.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/categories": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/categories",
-      "dataRoute": "/categories.rsc",
+      "dataRoute": "/blog/proper-tree-staking-techniques-young-trees.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -539,6 +490,31 @@
       "initialExpireSeconds": 31536000,
       "srcRoute": "/categories/[slug]",
       "dataRoute": "/categories/gardening.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/categories/grass-types": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": 3600,
+      "initialExpireSeconds": 31536000,
+      "srcRoute": "/categories/[slug]",
+      "dataRoute": "/categories/grass-types.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -949,8 +925,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "ccfe11935c7741d286c7d2f97bf1f93a",
-    "previewModeSigningKey": "e946c0dbda3653bd4cb082d3eab266f7fb7ff83fe05e51548933e5376278824c",
-    "previewModeEncryptionKey": "22e5bb15c89928c45edbde55d2e5c04bdd48cb68a3ce2c69f56bb63b87035f4b"
+    "previewModeId": "118808101e0279ee0f80b590cfb9a596",
+    "previewModeSigningKey": "893a55ecf27352c73dea9b4fbe9d6b2918de101159fbf75a2a9ec069babf68cf",
+    "previewModeEncryptionKey": "310f59ad28af105a780711ea8b5688852296c06cd194c8fa44334546122292f9"
   }
 }

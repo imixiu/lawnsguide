@@ -1,0 +1,215 @@
+═══════════════════════════════════════════════
+  progradelist image backfill
+═══════════════════════════════════════════════
+  Total without images: 8,996
+  Resume from ID:       0
+  Concurrency:          5
+  Shard:                0/1
+  CDN Token:            alibaba-icbu-se...
+═══════════════════════════════════════════════
+
+[50/8996] ✓50 ✗0 (gen:0 cdn:0) 1.9/s ETA:1.3h | lastId:13703893
+[100/8996] ✓100 ✗0 (gen:0 cdn:0) 1.9/s ETA:1.3h | lastId:13703943
+[150/8996] ✓150 ✗0 (gen:0 cdn:0) 1.5/s ETA:1.7h | lastId:13703993
+[200/8996] ✓199 ✗1 (gen:1 cdn:0) 1.3/s ETA:1.8h | lastId:13704043
+  ❌ ID:13704016 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+[250/8996] ✓249 ✗1 (gen:1 cdn:0) 1.3/s ETA:1.9h | lastId:13704093
+[300/8996] ✓299 ✗1 (gen:1 cdn:0) 1.3/s ETA:1.8h | lastId:13704143
+[350/8996] ✓349 ✗1 (gen:1 cdn:0) 1.3/s ETA:1.9h | lastId:13704193
+[400/8996] ✓399 ✗1 (gen:1 cdn:0) 1.3/s ETA:1.9h | lastId:13704243
+[450/8996] ✓449 ✗1 (gen:1 cdn:0) 1.2/s ETA:1.9h | lastId:13704293
+[500/8996] ✓498 ✗2 (gen:2 cdn:0) 1.2/s ETA:2.0h | lastId:13704343
+  ❌ ID:13704341 No image: {"request_id":"6f11719e-5b56-9272-ac92-d9f9e71a03e3","code":"DataInspe
+[550/8996] ✓548 ✗2 (gen:2 cdn:0) 1.2/s ETA:2.0h | lastId:13704393
+[600/8996] ✓598 ✗2 (gen:2 cdn:0) 1.2/s ETA:2.0h | lastId:13704443
+[650/8996] ✓648 ✗2 (gen:2 cdn:0) 1.2/s ETA:2.0h | lastId:13704493
+[700/8996] ✓698 ✗2 (gen:2 cdn:0) 1.2/s ETA:2.0h | lastId:13704543
+[750/8996] ✓748 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704593
+[800/8996] ✓798 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704643
+[850/8996] ✓848 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704693
+[900/8996] ✓898 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704743
+[950/8996] ✓948 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704793
+[1000/8996] ✓998 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704843
+[1050/8996] ✓1048 ✗2 (gen:2 cdn:0) 1.1/s ETA:2.0h | lastId:13704893
+[1100/8996] ✓1098 ✗2 (gen:2 cdn:0) 1.1/s ETA:1.9h | lastId:13704943
+[1150/8996] ✓1148 ✗2 (gen:2 cdn:0) 1.1/s ETA:1.9h | lastId:13704993
+[1200/8996] ✓1198 ✗2 (gen:2 cdn:0) 1.1/s ETA:1.9h | lastId:13705043
+[1250/8996] ✓1247 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.9h | lastId:13705093
+  ❌ ID:13705085 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+[1300/8996] ✓1297 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.9h | lastId:13705143
+[1350/8996] ✓1347 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.9h | lastId:13705193
+[1400/8996] ✓1397 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.9h | lastId:13705243
+[1450/8996] ✓1447 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.8h | lastId:13705293
+[1500/8996] ✓1497 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.8h | lastId:13705343
+[1550/8996] ✓1547 ✗3 (gen:3 cdn:0) 1.1/s ETA:1.8h | lastId:13705393
+[1600/8996] ✓1593 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.8h | lastId:13705443
+  ❌ ID:13705395 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+  ❌ ID:13705402 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+  ❌ ID:13705417 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+[1650/8996] ✓1643 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.8h | lastId:13705493
+[1700/8996] ✓1693 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.8h | lastId:13705543
+[1750/8996] ✓1743 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.8h | lastId:13705593
+[1800/8996] ✓1793 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.7h | lastId:13705643
+[1850/8996] ✓1843 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.7h | lastId:13705693
+[1900/8996] ✓1893 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.7h | lastId:13705743
+[1950/8996] ✓1943 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.7h | lastId:13705793
+[2000/8996] ✓1993 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.7h | lastId:13705843
+[2050/8996] ✓2043 ✗7 (gen:7 cdn:0) 1.2/s ETA:1.7h | lastId:13705893
+[2100/8996] ✓2093 ✗7 (gen:7 cdn:0) 1.1/s ETA:1.7h | lastId:13705943
+[2150/8996] ✓2143 ✗7 (gen:7 cdn:0) 1.2/s ETA:1.6h | lastId:13705993
+[2200/8996] ✓2193 ✗7 (gen:7 cdn:0) 1.2/s ETA:1.6h | lastId:13706043
+[2250/8996] ✓2243 ✗7 (gen:7 cdn:0) 1.2/s ETA:1.6h | lastId:13706093
+[2300/8996] ✓2292 ✗8 (gen:8 cdn:0) 1.1/s ETA:1.6h | lastId:13706143
+  ❌ ID:13706117 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+[2350/8996] ✓2342 ✗8 (gen:8 cdn:0) 1.1/s ETA:1.6h | lastId:13706193
+[2400/8996] ✓2391 ✗9 (gen:9 cdn:0) 1.1/s ETA:1.6h | lastId:13706243
+  ❌ ID:13706215 No image: {"request_id":"f4958ae2-5822-9db7-8bd7-67a04ee9a799","code":"DataInspe
+[2450/8996] ✓2441 ✗9 (gen:9 cdn:0) 1.1/s ETA:1.6h | lastId:13706293
+[2500/8996] ✓2491 ✗9 (gen:9 cdn:0) 1.1/s ETA:1.6h | lastId:13706343
+[2550/8996] ✓2541 ✗9 (gen:9 cdn:0) 1.1/s ETA:1.6h | lastId:13706393
+[2600/8996] ✓2591 ✗9 (gen:9 cdn:0) 1.1/s ETA:1.5h | lastId:13706443
+[2650/8996] ✓2641 ✗9 (gen:9 cdn:0) 1.1/s ETA:1.5h | lastId:13706493
+[2700/8996] ✓2690 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.5h | lastId:13706543
+  ❌ ID:13706519 CDN error: {"message":"url is invalid","code":400}
+[2750/8996] ✓2740 ✗10 (gen:9 cdn:1) 1.2/s ETA:1.5h | lastId:13706593
+[2800/8996] ✓2790 ✗10 (gen:9 cdn:1) 1.2/s ETA:1.5h | lastId:13706643
+[2850/8996] ✓2840 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.5h | lastId:13706693
+[2900/8996] ✓2890 ✗10 (gen:9 cdn:1) 1.2/s ETA:1.5h | lastId:13706743
+[2950/8996] ✓2940 ✗10 (gen:9 cdn:1) 1.2/s ETA:1.5h | lastId:13706793
+[3000/8996] ✓2990 ✗10 (gen:9 cdn:1) 1.2/s ETA:1.4h | lastId:13706843
+[3050/8996] ✓3040 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.4h | lastId:13706893
+[3100/8996] ✓3090 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.4h | lastId:13706943
+[3150/8996] ✓3140 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.4h | lastId:13706993
+[3200/8996] ✓3190 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.4h | lastId:13707043
+[3250/8996] ✓3240 ✗10 (gen:9 cdn:1) 1.1/s ETA:1.4h | lastId:13707093
+[3300/8996] ✓3290 ✗10 (gen:9 cdn:1) 1.2/s ETA:1.4h | lastId:13707143
+[3350/8996] ✓3338 ✗12 (gen:11 cdn:1) 1.1/s ETA:1.4h | lastId:13707193
+  ❌ ID:13707175 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+  ❌ ID:13707188 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+[3400/8996] ✓3388 ✗12 (gen:11 cdn:1) 1.1/s ETA:1.4h | lastId:13707243
+[3450/8996] ✓3438 ✗12 (gen:11 cdn:1) 1.2/s ETA:1.3h | lastId:13707293
+[3500/8996] ✓3488 ✗12 (gen:11 cdn:1) 1.2/s ETA:1.3h | lastId:13707343
+[3550/8996] ✓3538 ✗12 (gen:11 cdn:1) 1.1/s ETA:1.3h | lastId:13707393
+[3600/8996] ✓3588 ✗12 (gen:11 cdn:1) 1.2/s ETA:1.3h | lastId:13707443
+[3650/8996] ✓3636 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.3h | lastId:13707493
+  ❌ ID:13707470 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+  ❌ ID:13707471 No image: {"code":"Throttling.RateQuota","message":"Requests rate limit exceeded
+[3700/8996] ✓3686 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.3h | lastId:13707543
+[3750/8996] ✓3736 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.3h | lastId:13707593
+[3800/8996] ✓3786 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707643
+[3850/8996] ✓3836 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707693
+[3900/8996] ✓3886 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707743
+[3950/8996] ✓3936 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707793
+[4000/8996] ✓3986 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707843
+[4050/8996] ✓4036 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707893
+[4100/8996] ✓4086 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707943
+[4150/8996] ✓4136 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.2h | lastId:13707993
+[4200/8996] ✓4186 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708043
+[4250/8996] ✓4236 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708093
+[4300/8996] ✓4286 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708143
+[4350/8996] ✓4336 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708193
+[4400/8996] ✓4386 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708243
+[4450/8996] ✓4436 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708293
+[4500/8996] ✓4486 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708343
+[4550/8996] ✓4536 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.1h | lastId:13708393
+[4600/8996] ✓4586 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708443
+[4650/8996] ✓4636 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708493
+[4700/8996] ✓4686 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708543
+[4750/8996] ✓4736 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708593
+[4800/8996] ✓4786 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708643
+[4850/8996] ✓4836 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708693
+[4900/8996] ✓4886 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708743
+[4950/8996] ✓4936 ✗14 (gen:13 cdn:1) 1.2/s ETA:1.0h | lastId:13708793
+[5000/8996] ✓4986 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13708843
+[5050/8996] ✓5036 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13708893
+[5100/8996] ✓5086 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13708943
+[5150/8996] ✓5136 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13708993
+[5200/8996] ✓5186 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13709043
+[5250/8996] ✓5236 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13709093
+[5300/8996] ✓5286 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13709143
+[5350/8996] ✓5336 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.9h | lastId:13709193
+[5400/8996] ✓5386 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709243
+[5450/8996] ✓5436 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709293
+[5500/8996] ✓5486 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709343
+[5550/8996] ✓5536 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709393
+[5600/8996] ✓5586 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709443
+[5650/8996] ✓5636 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709493
+[5700/8996] ✓5686 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709543
+[5750/8996] ✓5736 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.8h | lastId:13709593
+[5800/8996] ✓5786 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709643
+[5850/8996] ✓5836 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709693
+[5900/8996] ✓5886 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709743
+[5950/8996] ✓5936 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709793
+[6000/8996] ✓5986 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709843
+[6050/8996] ✓6036 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709893
+[6100/8996] ✓6086 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709943
+[6150/8996] ✓6136 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.7h | lastId:13709993
+[6200/8996] ✓6186 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.6h | lastId:13710043
+[6250/8996] ✓6236 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.6h | lastId:13710093
+[6300/8996] ✓6286 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.6h | lastId:13710143
+[6350/8996] ✓6336 ✗14 (gen:13 cdn:1) 1.2/s ETA:0.6h | lastId:13710193
+[6400/8996] ✓6385 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.6h | lastId:13710243
+  ❌ ID:13710238 CDN error: {"code":400,"message":"url is invalid"}
+[6450/8996] ✓6435 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.6h | lastId:13710293
+[6500/8996] ✓6485 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.6h | lastId:13710343
+[6550/8996] ✓6535 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.6h | lastId:13710393
+[6600/8996] ✓6585 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710443
+[6650/8996] ✓6635 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710493
+[6700/8996] ✓6685 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710543
+[6750/8996] ✓6735 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710593
+[6800/8996] ✓6785 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710643
+[6850/8996] ✓6835 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710693
+[6900/8996] ✓6885 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710743
+[6950/8996] ✓6935 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.5h | lastId:13710793
+[7000/8996] ✓6985 ✗15 (gen:13 cdn:2) 1.2/s ETA:0.4h | lastId:13710843
+[7050/8996] ✓7035 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13710893
+[7100/8996] ✓7085 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13710943
+[7150/8996] ✓7135 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13710993
+[7200/8996] ✓7185 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13711043
+[7250/8996] ✓7235 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13711093
+[7300/8996] ✓7285 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13711143
+[7350/8996] ✓7335 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13711193
+[7400/8996] ✓7385 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.4h | lastId:13711243
+[7450/8996] ✓7435 ✗15 (gen:13 cdn:2) 1.3/s ETA:0.3h | lastId:13711293
+[7500/8996] ✓7484 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711343
+  ❌ ID:13711294 CDN error: {"message":"url is invalid","code":400}
+[7550/8996] ✓7534 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711393
+[7600/8996] ✓7584 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711443
+[7650/8996] ✓7634 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711493
+[7700/8996] ✓7684 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711543
+[7750/8996] ✓7734 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711593
+[7800/8996] ✓7784 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711643
+[7850/8996] ✓7834 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.3h | lastId:13711693
+[7900/8996] ✓7884 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13711743
+[7950/8996] ✓7934 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13711793
+[8000/8996] ✓7984 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13711843
+[8050/8996] ✓8034 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13711893
+[8100/8996] ✓8084 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13711943
+[8150/8996] ✓8134 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13711993
+[8200/8996] ✓8184 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13712043
+[8250/8996] ✓8234 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.2h | lastId:13712093
+[8300/8996] ✓8284 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712143
+[8350/8996] ✓8334 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712193
+[8400/8996] ✓8384 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712243
+[8450/8996] ✓8434 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712293
+[8500/8996] ✓8484 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712343
+[8550/8996] ✓8534 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712393
+[8600/8996] ✓8584 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712443
+[8650/8996] ✓8634 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712493
+[8700/8996] ✓8684 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712543
+[8750/8996] ✓8734 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.1h | lastId:13712593
+[8800/8996] ✓8784 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.0h | lastId:13712643
+[8850/8996] ✓8834 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.0h | lastId:13712693
+[8900/8996] ✓8884 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.0h | lastId:13712743
+[8950/8996] ✓8934 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.0h | lastId:13712793
+[8996/8996] ✓8980 ✗16 (gen:13 cdn:3) 1.3/s ETA:0.0h | lastId:13712839
+
+✅ All articles processed!
+
+═══════════════════════════════════════════════
+  Complete!
+  Success: 8980
+  Failed:  16 (gen:13 cdn:3)
+  Time:    6815s (1.9h)
+  Rate:    1.3 img/s
+═══════════════════════════════════════════════

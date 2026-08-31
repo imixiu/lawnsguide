@@ -1,0 +1,21 @@
+═══════════════════════════════════════════════
+  progradelist image backfill
+═══════════════════════════════════════════════
+  Total without images: 16
+  Resume from ID:       0
+  Concurrency:          3
+  Shard:                0/1
+  CDN Token:            alibaba-icbu-se...
+═══════════════════════════════════════════════
+
+[16/16] ✓16 ✗0 (gen:0 cdn:0) 1.4/s ETA:0.0h | lastId:13711294
+
+✅ All articles processed!
+
+═══════════════════════════════════════════════
+  Complete!
+  Success: 16
+  Failed:  0 (gen:0 cdn:0)
+  Time:    12s (0.0h)
+  Rate:    1.3 img/s
+═══════════════════════════════════════════════

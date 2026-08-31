@@ -5,6 +5,7 @@ export const CATEGORIES = [
   { slug: "tree-care",    label: "Tree Care",    description: "Pruning, planting, and caring for trees and shrubs." },
   { slug: "gardening",    label: "Gardening",    description: "Vegetable gardens, flower beds, and companion planting guides." },
   { slug: "home-garden",  label: "Home & Garden",description: "Outdoor living, garden tools, and home improvement tips." },
+  { slug: "grass-types",  label: "Grass Types",  description: "Identify, select, and maintain the best grass varieties for your climate." },
 ] as const;
 
 export type CategorySlug = typeof CATEGORIES[number]["slug"];

@@ -5,9 +5,7 @@ import { CATEGORIES } from "@/lib/categories";
 const SITE_URL = "https://lawnsguide.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [articles] = await Promise.all([
-    getAllArticles()(),
-  ]);
+  const articles = await getAllArticles();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1 },

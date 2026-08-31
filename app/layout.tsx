@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://lawnsguide.com"),
   verification: {
     google: ["LF0EkL5hrd-mZ58GiiubfUJcruHZT2WuaCahORivC_Q", "9AQKfZBrs6H-eY48LF6Qok51JIvOZjEY7zPCHCXVEU8", "Ustqwq-dgKtXUXNfDZOYPUafTz2xr79TW7sjosmvfGI"],
-    other: { "msvalidate.01": "46A263D9F5B5B42F858E448A6A9C5D16" },
+    other: { "msvalidate.01": "98733F4CB57BF5ABEEB371E57CA78178" },
   },
   other: { "aplus-core": "aplus.js", "aplus-waiting": "MAN" },
   title: { default: "LawnsGuide – Lawn Care & Gardening Tips", template: "%s | LawnsGuide" },

@@ -1,0 +1,55 @@
+═══════════════════════════════════════════════
+  lawnsguide: strip empty-src img tags
+═══════════════════════════════════════════════
+
+[200] cleaned 407 empty imgs | lastId:13704065 | 2s
+[400] cleaned 818 empty imgs | lastId:13704265 | 2s
+[600] cleaned 1230 empty imgs | lastId:13704465 | 3s
+[800] cleaned 1648 empty imgs | lastId:13704665 | 3s
+[1000] cleaned 2058 empty imgs | lastId:13704865 | 4s
+[1200] cleaned 2470 empty imgs | lastId:13705065 | 5s
+[1400] cleaned 2882 empty imgs | lastId:13705265 | 5s
+[1600] cleaned 3293 empty imgs | lastId:13705465 | 6s
+[1800] cleaned 3702 empty imgs | lastId:13705665 | 6s
+[2000] cleaned 4108 empty imgs | lastId:13705865 | 7s
+[2200] cleaned 4518 empty imgs | lastId:13706065 | 7s
+[2400] cleaned 4925 empty imgs | lastId:13706265 | 8s
+[2600] cleaned 5333 empty imgs | lastId:13706465 | 9s
+[2800] cleaned 5750 empty imgs | lastId:13706665 | 9s
+[3000] cleaned 6165 empty imgs | lastId:13706865 | 10s
+[3200] cleaned 6573 empty imgs | lastId:13707065 | 10s
+[3400] cleaned 6978 empty imgs | lastId:13707265 | 11s
+[3600] cleaned 7386 empty imgs | lastId:13707465 | 11s
+[3800] cleaned 7791 empty imgs | lastId:13707665 | 12s
+[4000] cleaned 8202 empty imgs | lastId:13707865 | 13s
+[4200] cleaned 8608 empty imgs | lastId:13708065 | 13s
+[4400] cleaned 9015 empty imgs | lastId:13708265 | 14s
+[4600] cleaned 9427 empty imgs | lastId:13708465 | 14s
+[4800] cleaned 9838 empty imgs | lastId:13708665 | 15s
+[5000] cleaned 10243 empty imgs | lastId:13708865 | 15s
+[5200] cleaned 10654 empty imgs | lastId:13709065 | 16s
+[5400] cleaned 11064 empty imgs | lastId:13709265 | 16s
+[5600] cleaned 11474 empty imgs | lastId:13709465 | 17s
+[5800] cleaned 11878 empty imgs | lastId:13709665 | 17s
+[6000] cleaned 12285 empty imgs | lastId:13709865 | 18s
+[6200] cleaned 12694 empty imgs | lastId:13710065 | 19s
+[6400] cleaned 13101 empty imgs | lastId:13710265 | 19s
+[6600] cleaned 13511 empty imgs | lastId:13710465 | 20s
+[6800] cleaned 13915 empty imgs | lastId:13710665 | 20s
+[7000] cleaned 14327 empty imgs | lastId:13710865 | 21s
+[7200] cleaned 14735 empty imgs | lastId:13711065 | 21s
+[7400] cleaned 15150 empty imgs | lastId:13711265 | 22s
+[7600] cleaned 15555 empty imgs | lastId:13711465 | 22s
+[7800] cleaned 15958 empty imgs | lastId:13711665 | 23s
+[8000] cleaned 16366 empty imgs | lastId:13711865 | 23s
+[8200] cleaned 16774 empty imgs | lastId:13712065 | 24s
+[8400] cleaned 17179 empty imgs | lastId:13712265 | 25s
+[8600] cleaned 17587 empty imgs | lastId:13712465 | 25s
+[8800] cleaned 17993 empty imgs | lastId:13712665 | 26s
+[8974] cleaned 18346 empty imgs | lastId:13712839 | 26s
+
+═══════════════════════════════════════════════
+  Done! Articles processed: 8974
+  Empty img tags removed: 18346
+  Time: 26s
+═══════════════════════════════════════════════
