@@ -2,13 +2,14 @@
  * Postbuild script: inject CF Cache API into OpenNext worker.js
  * Caches GET 200 responses for content pages (1 year).
  * Skips sitemap, _next, api, and non-200 responses.
+ *
+ * FALLBACK: If `caches` API is unavailable (e.g. Vercel Edge Runtime),
+ * falls back to Cache-Control headers only.
  */
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 
 const WORKER_PATH = ".open-next/worker.js";
 
-// Skip if worker.js doesn't exist yet (e.g. when triggered by npm lifecycle during next build)
-import { existsSync } from "fs";
 if (!existsSync(WORKER_PATH)) {
   console.log("(skipping: .open-next/worker.js not found — run after open-next build)");
   process.exit(0);
@@ -16,9 +17,10 @@ if (!existsSync(WORKER_PATH)) {
 
 const worker = readFileSync(WORKER_PATH, "utf-8");
 
-// 1. Cache helpers
+// 1. Cache helpers with fallback for environments without `caches` API
 const cacheHelpers = `
-            // --- CF Cache API ---
+            // --- CF Cache API (with fallback) ---
+            const _cacheAvailable = typeof caches !== "undefined" && caches && caches.default;
             function shouldCache(url) {
                 const p = new URL(url).pathname;
                 if (p.startsWith("/sitemap/") || p.startsWith("/_next/") || p.startsWith("/api/")) return false;
@@ -26,15 +28,16 @@ const cacheHelpers = `
                 return true;
             }
             async function cacheGet(url) {
+                if (!_cacheAvailable) return null;
                 try {
-const cacheUrl = new URL(url); cacheUrl.searchParams.set("_cv", "2"); const key = new Request(cacheUrl.toString(), { method: "GET", headers: {} });
-                const hit = await caches.default.match(key);
+                    const cacheUrl = new URL(url); cacheUrl.searchParams.set("_cv", "2"); const key = new Request(cacheUrl.toString(), { method: "GET", headers: {} });
+                    const hit = await caches.default.match(key);
                     if (hit) {
                         const r = new Response(hit.body, hit);
                         r.headers.set("x-cache", "HIT");
                         return r;
                     }
-                } catch(e) {}
+                } catch(e) { console.error("cacheGet error:", e); }
                 return null;
             }
             async function cachePut(url, resp) {
@@ -43,30 +46,35 @@ const cacheUrl = new URL(url); cacheUrl.searchParams.set("_cv", "2"); const key 
                     return resp;
                 }
                 try {
-                    const body = await resp.arrayBuffer();
+                    const body = await resp.clone().arrayBuffer();
                     const cacheUrl2 = new URL(url); cacheUrl2.searchParams.set("_cv", "2"); const key = new Request(cacheUrl2.toString(), { method: "GET", headers: {} });
                     const h = new Headers(resp.headers);
                     h.delete("vary");
                     h.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
-                    await caches.default.put(key, new Response(body, { status: 200, headers: h }));
+                    if (_cacheAvailable) {
+                        await caches.default.put(key, new Response(body, { status: 200, headers: h }));
+                    }
                     const rh = new Headers(resp.headers);
                     rh.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
-                    rh.set("x-cache", "MISS");
+                    rh.set("x-cache", _cacheAvailable ? "MISS" : "BYPASS");
                     return new Response(body, { status: 200, headers: rh });
                 } catch(e) {
+                    console.error("cachePut error:", e);
                     resp.headers.set("x-cache", "ERR");
                     return resp;
                 }
-            }`;
+            }
+            // CF cache diagnostic
+            const _diag = new Headers(); _diag.set('x-opennext-cache', _cacheAvailable ? '1' : '0');`;
 
-// Inject after skew protection check
+// Inject after skew protection check — replaces the url declaration line
 let patched = worker.replace(
     "const url = new URL(request.url);",
     cacheHelpers + "\n            const url = new URL(request.url);"
 );
 
 // 2. Cache lookup before middleware
-const lastHelperLine = cacheHelpers.split("\n").pop().trim();
+const lastHelperLine = "            const _diag = new Headers(); _diag.set('x-opennext-cache', _cacheAvailable ? '1' : '0');";
 patched = patched.replace(
     lastHelperLine + "\n            const url = new URL(request.url);",
     lastHelperLine + `
@@ -86,6 +94,7 @@ patched = patched.replace(
                 if (request.method === "GET" && shouldCache(request.url)) {
                     return await cachePut(request.url, reqOrResp);
                 }
+                reqOrResp.headers.set("x-cache-debug", "middleware-response");
                 return reqOrResp;
             }`
 );
@@ -94,7 +103,10 @@ patched = patched.replace(
 patched = patched.replace(
     `            return handler(reqOrResp, env, ctx, request.signal);`,
     `            const resp = await handler(reqOrResp, env, ctx, request.signal);
+            // DEBUG
+            resp.headers.set("x-cache-debug", "handler-reached");
             if (request.method === "GET" && shouldCache(request.url)) {
+                resp.headers.set("x-cache-debug", "cachePut-called");
                 return await cachePut(request.url, resp);
             }
             return resp;`
@@ -113,8 +125,9 @@ patched = patched.replace(
             }`
 );
 
+
 writeFileSync(WORKER_PATH, patched);
-console.log("✓ Injected CF Cache API (URL+status-based, middleware+handler)");
+console.log("✓ Injected CF Cache API (with fallback: caches=" + (typeof caches !== "undefined" ? "available" : "unavailable") + ")");
 
 // Delete static index.html from assets so route handler takes over
 import { unlinkSync } from "fs";
