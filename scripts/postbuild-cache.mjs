@@ -3,8 +3,8 @@
  * Caches GET 200 responses for content pages (1 year).
  * Skips sitemap, _next, api, and non-200 responses.
  *
- * FALLBACK: If `caches` API is unavailable (e.g. Vercel Edge Runtime),
- * falls back to Cache-Control headers only.
+ * FALLBACK: If `caches` API is unavailable or non-functional,
+ * relies on Cloudflare CDN caching via Cache-Control headers.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
 
@@ -17,14 +17,14 @@ if (!existsSync(WORKER_PATH)) {
 
 const worker = readFileSync(WORKER_PATH, "utf-8");
 
-// 1. Cache helpers with fallback for environments without `caches` API
+// 1. Cache helpers with runtime detection for `caches` API availability
 const cacheHelpers = `
-            // --- CF Cache API (with fallback) ---
+            // --- CF Cache API (with runtime detection) ---
             const _cacheAvailable = typeof caches !== "undefined" && caches && caches.default;
             function shouldCache(url) {
                 const p = new URL(url).pathname;
                 if (p.startsWith("/sitemap/") || p.startsWith("/_next/") || p.startsWith("/api/")) return false;
-                if (/\\.[a-z]{2,5}$/.test(p) && !p.endsWith(".html")) return false;
+                if (/\\\\.[a-z]{2,5}$/.test(p) && !p.endsWith(".html")) return false;
                 return true;
             }
             async function cacheGet(url) {
@@ -63,9 +63,7 @@ const cacheHelpers = `
                     resp.headers.set("x-cache", "ERR");
                     return resp;
                 }
-            }
-            // CF cache diagnostic
-            const _diag = new Headers(); _diag.set('x-opennext-cache', _cacheAvailable ? '1' : '0');`;
+            }`;
 
 // Inject after skew protection check — replaces the url declaration line
 let patched = worker.replace(
@@ -73,16 +71,15 @@ let patched = worker.replace(
     cacheHelpers + "\n            const url = new URL(request.url);"
 );
 
-// 2. Cache lookup before middleware
-const lastHelperLine = "            const _diag = new Headers(); _diag.set('x-opennext-cache', _cacheAvailable ? '1' : '0');";
+// 2. Cache lookup before middleware (GET check + cacheGet)
 patched = patched.replace(
-    lastHelperLine + "\n            const url = new URL(request.url);",
-    lastHelperLine + `
+    /const url = new URL\(request\.url\);/,
+    `const url = new URL(request.url);
+            // CF Cache lookup
             if (request.method === "GET" && shouldCache(request.url)) {
                 const hit = await cacheGet(request.url);
                 if (hit) return hit;
-            }
-            const url = new URL(request.url);`
+            }`
 );
 
 // 3. Intercept middleware Response return
@@ -103,17 +100,14 @@ patched = patched.replace(
 patched = patched.replace(
     `            return handler(reqOrResp, env, ctx, request.signal);`,
     `            const resp = await handler(reqOrResp, env, ctx, request.signal);
-            // DEBUG
-            resp.headers.set("x-cache-debug", "handler-reached");
             if (request.method === "GET" && shouldCache(request.url)) {
-                resp.headers.set("x-cache-debug", "cachePut-called");
                 return await cachePut(request.url, resp);
             }
             return resp;`
 );
 
 
-// 7. Block /_next/image at Worker entry — unoptimized: true means this route should never be hit
+// 5. Block /_next/image at Worker entry
 patched = patched.replace(
     `            const url = new URL(request.url);`,
     `            const url = new URL(request.url);
@@ -127,7 +121,7 @@ patched = patched.replace(
 
 
 writeFileSync(WORKER_PATH, patched);
-console.log("✓ Injected CF Cache API (with fallback: caches=" + (typeof caches !== "undefined" ? "available" : "unavailable") + ")");
+console.log("✓ Injected CF Cache API (caches available: " + (typeof caches !== "undefined" ? "yes" : "no") + ")");
 
 // Delete static index.html from assets so route handler takes over
 import { unlinkSync } from "fs";
