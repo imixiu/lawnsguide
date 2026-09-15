@@ -43,7 +43,16 @@ export default {
             }
             // @ts-expect-error: resolved by wrangler build
             const { handler } = await import("./server-functions/default/handler.mjs");
-            return handler(reqOrResp, env, ctx, request.signal);
+            const _resp = await handler(reqOrResp, env, ctx, request.signal); // _noStoreHtml
+            try {
+                const _ct = _resp.headers.get("content-type") || "";
+                if (_ct.includes("text/html")) {
+                    const _h = new Headers(_resp.headers);
+                    _h.set("cache-control", "no-store");
+                    return new Response(_resp.body, { status: _resp.status, statusText: _resp.statusText, headers: _h });
+                }
+            } catch (_) {}
+            return _resp;
         });
     },
 };
