@@ -3,7 +3,7 @@ import ArticleCard from "@/components/ArticleCard";
 import EmptyState from "@/components/EmptyState";
 import type { Metadata, ResolvingMetadata } from "next";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
   const params = await searchParams;

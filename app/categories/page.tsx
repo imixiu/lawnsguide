@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
 import type { Metadata } from "next";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
   const params = await searchParams;

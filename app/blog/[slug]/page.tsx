@@ -7,7 +7,7 @@ import ArticleCard from "@/components/ArticleCard";
 import type { Metadata } from "next";
 import { unstable_cache } from "next/cache";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

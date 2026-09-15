@@ -6,7 +6,7 @@ import { getRecentArticles } from "@/lib/db";
 import { CATEGORIES } from "@/lib/categories";
 import ArticleCard from "@/components/ArticleCard";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Lawn Care Guide – Expert Tips for a Healthy Green Lawn | LawnsGuide",
