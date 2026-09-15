@@ -84,18 +84,6 @@
       "destination": "/categories/pest-control",
       "statusCode": 308,
       "regex": "^(?!/_next)/pest-control(?:/)?$"
-    },
-    {
-      "source": "/blog/page/:num",
-      "destination": "/blog",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/blog/page(?:/([^/]+?))(?:/)?$"
-    },
-    {
-      "source": "/categories/page/:num",
-      "destination": "/categories",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/categories/page(?:/([^/]+?))(?:/)?$"
     }
   ],
   "headers": [],

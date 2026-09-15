@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npx @opennextjs/cloudflare build && node scripts/postbuild-cache.mjs",
     "start": "next start",
     "init-db": "npx tsx lib/init-db.ts",
-    "build:cf": "npx @opennextjs/cloudflare build && node scripts/postbuild-cache.mjs",
+    "build:cf": "npx -y @opennextjs/cloudflare build && node scripts/postbuild-cache.mjs",
     "postbuild": "node scripts/postbuild-cache.mjs"
   },
   "dependencies": {

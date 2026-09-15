@@ -2,6 +2,9 @@ import { createRequire as topLevelCreateRequire } from 'module';const require = 
 
 // open-next.config.ts
 var config = {
+  // Prevent recursion: package.json "build" itself calls opennext build, and
+  // opennext's default buildCommand is `npm run build` → infinite loop.
+  buildCommand: "NEXT_PRIVATE_TURBOPACK=0 npx next build",
   default: {
     override: {
       wrapper: "cloudflare-node",

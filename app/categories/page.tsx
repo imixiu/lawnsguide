@@ -15,6 +15,11 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   if (page > 1) {
     base.robots = { index: false, follow: true };
   }
+  
+  // Pagination noindex
+  if (page > 1) {
+    base.robots = { index: false, follow: true };
+  }
   return base;
 }
 

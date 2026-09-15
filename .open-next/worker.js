@@ -20,6 +20,12 @@ export default {
                 return response;
             }
             const url = new URL(request.url);
+            if (url.pathname === "/_next/image") {
+                return new Response("Not Found", {
+                    status: 404,
+                    headers: { "Cache-Control": "public, max-age=86400" }
+                });
+            }
             // Serve images in development.
             // Note: "/cdn-cgi/image/..." requests do not reach production workers.
             if (url.pathname.startsWith("/cdn-cgi/image/")) {

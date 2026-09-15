@@ -324,7 +324,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/best-grass-seed-for-ct-sun-and-shade": {
+    "/blog/assess-treat-lightning-strike-damage-trees": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -339,7 +339,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/best-grass-seed-for-ct-sun-and-shade.rsc",
+      "dataRoute": "/blog/assess-treat-lightning-strike-damage-trees.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -349,7 +349,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/best-grass-seed-for-wisconsin": {
+    "/blog/identify-manage-spotted-lanternfly-infestations": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -364,7 +364,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/best-grass-seed-for-wisconsin.rsc",
+      "dataRoute": "/blog/identify-manage-spotted-lanternfly-infestations.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -374,7 +374,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/diy-leaf-miner-control-vegetable-flower-gardens": {
+    "/blog/identifying-controlling-bermudagrass-mite-damage-lawns": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -389,7 +389,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/diy-leaf-miner-control-vegetable-flower-gardens.rsc",
+      "dataRoute": "/blog/identifying-controlling-bermudagrass-mite-damage-lawns.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -399,7 +399,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/managing-tree-suckers-water-sprouts-healthy-growth": {
+    "/blog/lawn-care-schedule-pacific-northwest": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -414,7 +414,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/managing-tree-suckers-water-sprouts-healthy-growth.rsc",
+      "dataRoute": "/blog/lawn-care-schedule-pacific-northwest.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -424,7 +424,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/organic-lawn-care-dayton-ohio": {
+    "/blog/tree-cabling-bracing-techniques-weak-branch-support": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -439,7 +439,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/organic-lawn-care-dayton-ohio.rsc",
+      "dataRoute": "/blog/tree-cabling-bracing-techniques-weak-branch-support.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -449,7 +449,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/proper-tree-staking-techniques-young-trees": {
+    "/blog/what-is-best-grass-seed-for-shaded-areas": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -464,7 +464,7 @@
       "initialRevalidateSeconds": 3600,
       "initialExpireSeconds": 31536000,
       "srcRoute": "/blog/[slug]",
-      "dataRoute": "/blog/proper-tree-staking-techniques-young-trees.rsc",
+      "dataRoute": "/blog/what-is-best-grass-seed-for-shaded-areas.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -925,8 +925,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "118808101e0279ee0f80b590cfb9a596",
-    "previewModeSigningKey": "893a55ecf27352c73dea9b4fbe9d6b2918de101159fbf75a2a9ec069babf68cf",
-    "previewModeEncryptionKey": "310f59ad28af105a780711ea8b5688852296c06cd194c8fa44334546122292f9"
+    "previewModeId": "b2754c106a1c0d1d06af231b583094aa",
+    "previewModeSigningKey": "7ea6244804d17041828d7c50bc6adca2ac71a7705477b58a4d9e9bdd19472aa7",
+    "previewModeEncryptionKey": "170443e0f17d5fd9c4a600ab1fbb1a7d73d2c28e87735f6a205b98d8d08f89d6"
   }
 }

@@ -15,4 +15,11 @@
       "service": "lawnsguide"
     }
   ]
+  ,
+  "routes": [
+    {
+      "pattern": "lawnsguide.com/*",
+      "zone_name": "lawnsguide.com"
+    }
+  ]
 }
