@@ -19,6 +19,56 @@ export default {
             if (response) {
                 return response;
             }
+            
+            // --- CF Cache API ---
+            function shouldCache(url) {
+                const p = new URL(url).pathname;
+                if (p.startsWith("/sitemap/") || p.startsWith("/_next/") || p.startsWith("/api/")) return false;
+                if (/\.[a-z]{2,5}$/.test(p) && !p.endsWith(".html")) return false;
+                return true;
+            }
+            async function cacheGet(url) {
+                try {
+                    const key = new Request(url, { method: "GET", headers: {} });
+                    const hit = await caches.default.match(key);
+                    if (hit) {
+                        const r = new Response(hit.body, hit);
+                        r.headers.set("x-cache", "HIT");
+                        return r;
+                    }
+                } catch(e) {}
+                return null;
+            }
+            async function cachePut(url, resp) {
+                if (resp.status !== 200) {
+                    resp.headers.set("x-cache", "SKIP-" + resp.status);
+                    return resp;
+                }
+                try {
+                    const body = await resp.arrayBuffer();
+                    const key = new Request(url, { method: "GET", headers: {} });
+                    const h = new Headers(resp.headers);
+                    h.delete("vary");
+                    h.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
+                    await caches.default.put(key, new Response(body, { status: 200, headers: h }));
+                    const rh = new Headers(resp.headers);
+                    rh.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
+                    rh.set("x-cache", "MISS");
+                    return new Response(body, { status: 200, headers: rh });
+                } catch(e) {
+                    resp.headers.set("x-cache", "ERR");
+                    return resp;
+                }
+            }
+            // Bot block before cache
+            const botUa = (request.headers.get("user-agent") || "").toLowerCase();
+            if (botUa.includes("semrush") || botUa.includes("ahrefsbot") || botUa.includes("ahrefs")) {
+                return new Response("Forbidden", { status: 403 });
+            }
+            if (request.method === "GET" && shouldCache(request.url)) {
+                const hit = await cacheGet(request.url);
+                if (hit) return hit;
+            }
             const url = new URL(request.url);
             if (url.pathname === "/_next/image") {
                 return new Response("Not Found", {
@@ -39,20 +89,18 @@ export default {
             // - `Request`s are handled by the Next server
             const reqOrResp = await middlewareHandler(request, env, ctx);
             if (reqOrResp instanceof Response) {
+                if (request.method === "GET" && shouldCache(request.url)) {
+                    return await cachePut(request.url, reqOrResp);
+                }
                 return reqOrResp;
             }
             // @ts-expect-error: resolved by wrangler build
             const { handler } = await import("./server-functions/default/handler.mjs");
-            const _resp = await handler(reqOrResp, env, ctx, request.signal); // _noStoreHtml
-            try {
-                const _ct = _resp.headers.get("content-type") || "";
-                if (_ct.includes("text/html")) {
-                    const _h = new Headers(_resp.headers);
-                    _h.set("cache-control", "no-store");
-                    return new Response(_resp.body, { status: _resp.status, statusText: _resp.statusText, headers: _h });
-                }
-            } catch (_) {}
-            return _resp;
+            const resp = await handler(reqOrResp, env, ctx, request.signal);
+            if (request.method === "GET" && shouldCache(request.url)) {
+                return await cachePut(request.url, resp);
+            }
+            return resp;
         });
     },
 };

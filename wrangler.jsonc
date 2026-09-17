@@ -5,6 +5,7 @@
   "account_id": "25e5887649f21af7f2869497017cb46f",
   "compatibility_date": "2025-06-15",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "usage_model": "bundled",
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"

@@ -1,54 +1,119 @@
 /**
- * Postbuild — cache: none variant (showroom sites) — canonical v2 (2026-09-15)
- * 1) rename public/index.html → _index.html.bak (防下次 build 再进 assets 被 ASSETS 直出)
- * 2) 删除 .open-next/assets/index.html
- * 3) 屏蔽 /_next/image (404)
- * 4) ⭐ handler 返回的所有 text/html 响应强制 cache-control: no-store
- *    (覆盖 OpenNext 给静态预渲染页自带的 s-maxage=31536000 — 源码层修不掉)
- * 幂等: 对已 patch 的 worker.js 重复运行安全。锚点不匹配时报错退出(不静默失败)。
+ * Postbuild script: inject CF Cache API into OpenNext worker.js
+ * Caches GET 200 responses for content pages (10 years).
+ * Skips sitemap, _next, api, and non-200 responses.
+ *
+ * Usage:
+ *   cp this-file scripts/postbuild-cache.mjs
+ *   npx @opennextjs/cloudflare build
+ *   node scripts/postbuild-cache.mjs
+ *   npx wrangler deploy
  */
-import { readFileSync, writeFileSync, unlinkSync, renameSync, existsSync, readdirSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 
-// 搜索引擎验证文件白名单（内容对所有人一致，无泄露风险，必须保持可访问）
-const VERIFY_RE = /^(google|yandex|bing|baidu|msn)[a-z0-9_\-]*\.html$/i;
-
-// 1) rename 所有 public/*.html（ASSETS html_handling 会把 /about 映射到 about.html，
-//    绕过 worker/middleware 直出并被 CDN 缓存 → 泄露。验证文件除外）
-try {
-  for (const fn of readdirSync("public")) {
-    if (fn.endsWith(".html") && !VERIFY_RE.test(fn) && !fn.startsWith("_")) {
-      renameSync(`public/${fn}`, `public/_${fn}.bak`);
-      console.log(`✓ Renamed public/${fn} → _${fn}.bak`);
-    }
-  }
-} catch (e) {
-  console.log("(no public dir)");
-}
-
-// 2) 删除 assets 中对应副本（同样白名单验证文件）
-try {
-  for (const fn of readdirSync(".open-next/assets")) {
-    if (fn.endsWith(".html") && !VERIFY_RE.test(fn)) {
-      unlinkSync(`.open-next/assets/${fn}`);
-      console.log(`✓ Deleted assets/${fn}`);
-    }
-  }
-} catch (e) {
-  console.log("(no assets dir)");
-}
-
-// 3) + 4) patch worker.js
 const WORKER_PATH = ".open-next/worker.js";
 let worker = readFileSync(WORKER_PATH, "utf-8");
 
-if (!worker.includes('url.pathname === "/_next/image"')) {
-  const anchor1 = `            const url = new URL(request.url);`;
-  if (!worker.includes(anchor1)) {
-    console.error("✗ ANCHOR1 not found (const url = new URL(request.url);) — worker.js 结构变了, 需人工适配");
-    process.exit(1);
-  }
-  worker = worker.replace(
-    anchor1,
+// Guard: skip if cache code already injected (prevent duplicate injection)
+if (worker.includes("// --- CF Cache API ---")) {
+    console.log("✓ CF Cache API already injected, skipping");
+    process.exit(0);
+}
+
+// 1. Cache helpers
+const cacheHelpers = `
+            // --- CF Cache API ---
+            function shouldCache(url) {
+                const p = new URL(url).pathname;
+                if (p.startsWith("/sitemap/") || p.startsWith("/_next/") || p.startsWith("/api/")) return false;
+                if (/\\.[a-z]{2,5}$/.test(p) && !p.endsWith(".html")) return false;
+                return true;
+            }
+            async function cacheGet(url) {
+                try {
+                    const key = new Request(url, { method: "GET", headers: {} });
+                    const hit = await caches.default.match(key);
+                    if (hit) {
+                        const r = new Response(hit.body, hit);
+                        r.headers.set("x-cache", "HIT");
+                        return r;
+                    }
+                } catch(e) {}
+                return null;
+            }
+            async function cachePut(url, resp) {
+                if (resp.status !== 200) {
+                    resp.headers.set("x-cache", "SKIP-" + resp.status);
+                    return resp;
+                }
+                try {
+                    const body = await resp.arrayBuffer();
+                    const key = new Request(url, { method: "GET", headers: {} });
+                    const h = new Headers(resp.headers);
+                    h.delete("vary");
+                    h.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
+                    await caches.default.put(key, new Response(body, { status: 200, headers: h }));
+                    const rh = new Headers(resp.headers);
+                    rh.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
+                    rh.set("x-cache", "MISS");
+                    return new Response(body, { status: 200, headers: rh });
+                } catch(e) {
+                    resp.headers.set("x-cache", "ERR");
+                    return resp;
+                }
+            }`;
+
+// Inject after skew protection check
+let patched = worker.replace(
+    "const url = new URL(request.url);",
+    cacheHelpers + "\n            const url = new URL(request.url);"
+);
+
+// 2. Bot block + cache lookup before middleware
+// Bot blocking MUST happen before cache lookup, otherwise bots get cached 200 responses
+const lastHelperLine = cacheHelpers.split("\n").pop().trim();
+patched = patched.replace(
+    lastHelperLine + "\n            const url = new URL(request.url);",
+    lastHelperLine + `
+            // Bot block before cache
+            const botUa = (request.headers.get("user-agent") || "").toLowerCase();
+            if (botUa.includes("semrush") || botUa.includes("ahrefsbot") || botUa.includes("ahrefs")) {
+                return new Response("Forbidden", { status: 403 });
+            }
+            if (request.method === "GET" && shouldCache(request.url)) {
+                const hit = await cacheGet(request.url);
+                if (hit) return hit;
+            }
+            const url = new URL(request.url);`
+);
+
+// 3. Intercept middleware Response return
+patched = patched.replace(
+    `            if (reqOrResp instanceof Response) {
+                return reqOrResp;
+            }`,
+    `            if (reqOrResp instanceof Response) {
+                if (request.method === "GET" && shouldCache(request.url)) {
+                    return await cachePut(request.url, reqOrResp);
+                }
+                return reqOrResp;
+            }`
+);
+
+// 4. Intercept handler return
+patched = patched.replace(
+    `            return handler(reqOrResp, env, ctx, request.signal);`,
+    `            const resp = await handler(reqOrResp, env, ctx, request.signal);
+            if (request.method === "GET" && shouldCache(request.url)) {
+                return await cachePut(request.url, resp);
+            }
+            return resp;`
+);
+
+
+// 7. Block /_next/image at Worker entry — unoptimized: true means this route should never be hit
+patched = patched.replace(
+    `            const url = new URL(request.url);`,
     `            const url = new URL(request.url);
             if (url.pathname === "/_next/image") {
                 return new Response("Not Found", {
@@ -56,35 +121,16 @@ if (!worker.includes('url.pathname === "/_next/image"')) {
                     headers: { "Cache-Control": "public, max-age=86400" }
                 });
             }`
-  );
-  console.log("✓ Blocked /_next/image");
-} else {
-  console.log("✓ /_next/image already blocked");
-}
+);
 
-if (!worker.includes("_noStoreHtml")) {
-  const anchor2 = `            return handler(reqOrResp, env, ctx, request.signal);`;
-  if (!worker.includes(anchor2)) {
-    console.error("✗ ANCHOR2 not found (return handler(...)) — worker.js 结构变了, 需人工适配");
-    process.exit(1);
-  }
-  worker = worker.replace(
-    anchor2,
-    `            const _resp = await handler(reqOrResp, env, ctx, request.signal); // _noStoreHtml
-            try {
-                const _ct = _resp.headers.get("content-type") || "";
-                if (_ct.includes("text/html")) {
-                    const _h = new Headers(_resp.headers);
-                    _h.set("cache-control", "no-store");
-                    return new Response(_resp.body, { status: _resp.status, statusText: _resp.statusText, headers: _h });
-                }
-            } catch (_) {}
-            return _resp;`
-  );
-  console.log("✓ Enforced no-store on all HTML responses");
-} else {
-  console.log("✓ no-store enforcement already present");
-}
+writeFileSync(WORKER_PATH, patched);
+console.log("✓ Injected CF Cache API (URL+status-based, middleware+handler)");
 
-writeFileSync(WORKER_PATH, worker);
-console.log("[postbuild] Done (cache: none, html no-store enforced)");
+// Delete static index.html from assets so route handler takes over
+import { unlinkSync } from "fs";
+try {
+  unlinkSync(".open-next/assets/index.html");
+  console.log("✓ Deleted .open-next/assets/index.html");
+} catch(e) {
+  console.log("(no static index.html to delete)");
+}
