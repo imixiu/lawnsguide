@@ -15,14 +15,24 @@ const WORKER_PATH = ".open-next/worker.js";
 let worker = readFileSync(WORKER_PATH, "utf-8");
 
 // Guard: skip if cache code already injected (prevent duplicate injection)
-if (worker.includes("// --- CF Cache API ---")) {
+if (worker.includes("// --- CF Cache API")) {
     console.log("✓ CF Cache API already injected, skipping");
     process.exit(0);
 }
 
-// 1. Cache helpers
+// 0. Read BUILD_ID for cache versioning (invalidates old cache on each deploy)
+const buildId = readFileSync(".open-next/assets/BUILD_ID", "utf-8").trim();
+const cacheVersion = buildId.substring(0, 8);
+
+// 1. Cache helpers (cache key includes BUILD_ID to auto-invalidate on redeploy)
 const cacheHelpers = `
-            // --- CF Cache API ---
+            // --- CF Cache API (v: ${cacheVersion}) ---
+            const _CV = "${cacheVersion}";
+            function _cacheKey(url) {
+                const u = new URL(url);
+                u.searchParams.set("_cv", _CV);
+                return new Request(u.toString(), { method: "GET", headers: {} });
+            }
             function shouldCache(url) {
                 const p = new URL(url).pathname;
                 if (p.startsWith("/sitemap/") || p.startsWith("/_next/") || p.startsWith("/api/")) return false;
@@ -31,7 +41,7 @@ const cacheHelpers = `
             }
             async function cacheGet(url) {
                 try {
-                    const key = new Request(url, { method: "GET", headers: {} });
+                    const key = _cacheKey(url);
                     const hit = await caches.default.match(key);
                     if (hit) {
                         const r = new Response(hit.body, hit);
@@ -48,7 +58,7 @@ const cacheHelpers = `
                 }
                 try {
                     const body = await resp.arrayBuffer();
-                    const key = new Request(url, { method: "GET", headers: {} });
+                    const key = _cacheKey(url);
                     const h = new Headers(resp.headers);
                     h.delete("vary");
                     h.set("cache-control", "public, max-age=315360000, s-maxage=315360000");
